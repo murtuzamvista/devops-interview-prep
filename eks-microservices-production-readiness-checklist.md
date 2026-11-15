@@ -104,6 +104,11 @@ Elastic Kubernetes Service (EKS)**.
 ---
 
 ## 5. CI/CD & GitOps Delivery
+- [ ] **Pre-Commit & PR Secret Scanning:** Enforce local `pre-commit`
+  hooks (using Gitleaks, TruffleHog, or `detect-secrets`) to block
+  hardcoded credentials before `git push`, paired with required CI status
+  checks and GitHub Push Protection to block pull request merges on
+  secret detection.
 - [ ] **Declarative GitOps Sync:** Use Argo CD or Flux to continuously
   reconcile cluster manifests from Git rather than pushing imperative
   `kubectl apply` commands from CI runners.
@@ -145,8 +150,7 @@ Elastic Kubernetes Service (EKS)**.
 | :--- | :--- | :--- |
 | **Infrastructure** | Single-AZ outage & starvation | Multi-AZ Nodes, Karpenter, Taints |
 | **Networking** | IP exhaustion & exposed APIs | Prefix Delegation, Private Endpoints |
-| **Security & IAM** | Credential leaks & escalation | Pod Identities / IRSA, KMS Secrets |
+| **Security & IAM** | Runtime credential leaks & escalation | Pod Identities / IRSA, KMS Secrets |
 | **Resilience** | Dropped traffic & cascade failures | `preStop`, PDBs, Topology Spread |
-| **CI/CD & GitOps** | Config drift & bad releases | Argo CD, SHA Tags, Kyverno |
+| **CI/CD & GitOps** | Repo secret leaks, drift & bad releases | Gitleaks / PR Checks, Argo CD, Kyverno |
 | **Observability** | Blind spots & runaway spend | Fluent Bit, Prometheus/OTel, OpenCost |
-
